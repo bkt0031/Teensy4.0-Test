@@ -1,3 +1,3 @@
-#First Test Project
-#Description
+# First Test Project
+# Description
 Pretty boring stuff here. Along with the Teensy4.0 I purchased a QVGA (320x240) 2.2" TFT Display from China. In this project I will create a *Hello World!* clock of sorts just to test out SPI, interrupts, the RTC, and this crazy display. I'm also just trying to get used to the PlatformIO way of doing things as well as getting into using C++ for microcontroller development (not my language of choice - sorry). I'm sure my coding will keep wandering back to C - it will take some time.
