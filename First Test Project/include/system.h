@@ -3,6 +3,8 @@
     #include <stdint.h>
     #include <stdbool.h>
 
+    #define SNVS_HPSR_PI_MASK (0x2U)
+
     struct systime_t {
         uint8_t seconds;
         uint8_t minutes;
@@ -16,6 +18,11 @@
         volatile bool timeUpdate;
     };
 
-    // system_t sysData;
+    system_t sysData;
+
+    void gpt2_isr();
+    void gpt2_init();
+    void snvs_isr();
+    void snvs_pi_init();
 
 #endif
