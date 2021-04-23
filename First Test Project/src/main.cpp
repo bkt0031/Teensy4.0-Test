@@ -10,6 +10,7 @@
 
 char dateStr[15];
 uint32_t rtcPtrVal;
+system_t sysData = {0u, {0u, 0u, 0u, 0u}, 0u};
 
 ILI9341_t3n tft = ILI9341_t3n(ILI9341_CS, ILI9341_DC, ILI9341_RST);
 

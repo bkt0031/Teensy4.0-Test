@@ -1,5 +1,5 @@
-#ifndef MAIN_H
-    #define MAIN_H
+#ifndef SYSTEM_H
+    #define SYSTEM_H
     #include <stdint.h>
     #include <stdbool.h>
 
@@ -18,8 +18,7 @@
         volatile bool timeUpdate;
     };
 
-    system_t sysData;
-
+    extern system_t sysData;
     void gpt2_isr();
     void gpt2_init();
     void snvs_isr();

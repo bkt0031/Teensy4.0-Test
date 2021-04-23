@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include "system.h"
 
+
 void snvs_isr() 
 {
   /*
@@ -31,13 +32,11 @@ void snvs_isr()
 void snvs_pi_init() 
 {
   SNVS_HPCR &= ~SNVS_HPCR_PI_EN;
-  while ((SNVS_HPCR & SNVS_HPCR_PI_EN))
-    ;
+  while ((SNVS_HPCR & SNVS_HPCR_PI_EN));
 
   SNVS_HPCR |= SNVS_HPCR_PI_FREQ(0x0F);
   SNVS_HPCR |= SNVS_HPCR_PI_EN;
-  while (!(SNVS_HPCR & SNVS_HPCR_PI_EN))
-    ;
+  while (!(SNVS_HPCR & SNVS_HPCR_PI_EN));
 
   attachInterruptVector(IRQ_SNVS_IRQ, snvs_isr);
   NVIC_ENABLE_IRQ(IRQ_SNVS_IRQ);
