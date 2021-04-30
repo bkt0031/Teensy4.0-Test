@@ -5,17 +5,17 @@ void gpt2_isr()
 {
   GPT2_SR |= GPT_SR_OF3;
   sysData.timeUpdate = true;
-  ++sysData.epoch;
-  ++sysData.systemTime.seconds;
-  if (sysData.systemTime.seconds == 60u) {
-    ++sysData.systemTime.minutes;
-    sysData.systemTime.seconds = 0u;
-    if (sysData.systemTime.minutes == 60u) {
-      ++sysData.systemTime.hours;
-      sysData.systemTime.minutes = 0u;
-      if (sysData.systemTime.hours == 24u) {
-        ++sysData.systemTime.days;
-        sysData.systemTime.hours = 0u;
+  ++sysData.systemEpoch;
+  ++sysData.systemTime.Seconds;
+  if (sysData.systemTime.Seconds == 60u) {
+    ++sysData.systemTime.Minutes;
+    sysData.systemTime.Seconds = 0u;
+    if (sysData.systemTime.Minutes == 60u) {
+      ++sysData.systemTime.Hours;
+      sysData.systemTime.Minutes = 0u;
+      if (sysData.systemTime.Hours == 24u) {
+        ++sysData.systemTime.Days;
+        sysData.systemTime.Hours = 0u;
       }
     }
   }

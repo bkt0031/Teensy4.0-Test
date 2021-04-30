@@ -3,16 +3,17 @@
 #include <SPI.h>
 #include <ili9341_t3n_font_Arial.h>
 #include "system.h"
+#include "rtc_time.h"
 
 #define ILI9341_RST 23
 #define ILI9341_DC 9
 #define ILI9341_CS 10
 
-char dateStr[15];
+char dateStr[23];
 uint32_t rtcPtrVal;
-system_t sysData = {0u, {0u, 0u, 0u, 0u}, 0u};
 
 ILI9341_t3n tft = ILI9341_t3n(ILI9341_CS, ILI9341_DC, ILI9341_RST);
+rtc_time rtc = rtc_time();
 
 void setup() {
   // put your setup code here, to run once:
@@ -33,20 +34,19 @@ void setup() {
   Serial.println("Display \"Hello World\"");
   tft.setCursor(40,80);
   tft.println("Hello World!");
-  
+  rtc.create_date_time_string(dateStr, sizeof(dateStr), format_24);
+  tft.setCursor(40, 120);
+  tft.println(dateStr);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  if(sysData.timeUpdate) {
-    sysData.timeUpdate = false;
-    sprintf(dateStr, "%03dd %02d:%02d:%02d", 
-            sysData.systemTime.days,
-            sysData.systemTime.hours, 
-            sysData.systemTime.minutes,
-            sysData.systemTime.seconds);
+  if(rtc.is_tick()) {
+    rtc.clear_tick();
+    rtc.create_date_time_string(dateStr, sizeof(dateStr), format_24);
     tft.setCursor(40, 120);
     tft.println(dateStr);
+    Serial.printf("tft: %s\n", dateStr);
   }
   delay(100);
 }

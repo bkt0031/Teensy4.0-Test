@@ -1,27 +1,15 @@
 #ifndef SYSTEM_H
-    #define SYSTEM_H
-    #include <stdint.h>
-    #include <stdbool.h>
+#define SYSTEM_H
+#include "rtc_time.h"
+#include <stdbool.h>
+#include <stdint.h>
 
-    #define SNVS_HPSR_PI_MASK (0x2U)
+#define SNVS_HPSR_PI_MASK (0x2U)
 
-    struct systime_t {
-        uint8_t seconds;
-        uint8_t minutes;
-        uint8_t hours;
-        uint8_t days;
-    };
-
-    struct system_t {
-        volatile uint32_t epoch;
-        volatile systime_t systemTime;
-        volatile bool timeUpdate;
-    };
-
-    extern system_t sysData;
-    void gpt2_isr();
-    void gpt2_init();
-    void snvs_isr();
-    void snvs_pi_init();
+void gpt2_isr();
+void gpt2_init();
+void snvs_isr();
+void snvs_pi_init();
+extern rtc_time rtc;
 
 #endif

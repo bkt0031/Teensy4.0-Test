@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include "system.h"
+#include "rtc_time.h"
 
 
 void snvs_isr() 
@@ -11,21 +12,7 @@ void snvs_isr()
    * used so only reset it.
    */
   SNVS_HPSR |= SNVS_HPSR_PI_MASK; // reset interrupt
-  sysData.timeUpdate = true;
-  ++sysData.epoch;
-  ++sysData.systemTime.seconds;
-  if (sysData.systemTime.seconds == 60u) {
-    ++sysData.systemTime.minutes;
-    sysData.systemTime.seconds = 0u;
-    if (sysData.systemTime.minutes == 60u) {
-      ++sysData.systemTime.hours;
-      sysData.systemTime.minutes = 0u;
-      if (sysData.systemTime.hours == 24u) {
-        ++sysData.systemTime.days;
-        sysData.systemTime.hours = 0u;
-      }
-    }
-  }
+  rtc.one_second_tick();
   asm volatile("dsb");
 }
 
