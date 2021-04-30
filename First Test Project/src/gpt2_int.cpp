@@ -1,24 +1,11 @@
-#include <Arduino.h>
+#include "rtc_time.h"
 #include "system.h"
+#include <Arduino.h>
 
 void gpt2_isr() 
 {
-  GPT2_SR |= GPT_SR_OF3;
-  sysData.timeUpdate = true;
-  ++sysData.systemEpoch;
-  ++sysData.systemTime.Seconds;
-  if (sysData.systemTime.Seconds == 60u) {
-    ++sysData.systemTime.Minutes;
-    sysData.systemTime.Seconds = 0u;
-    if (sysData.systemTime.Minutes == 60u) {
-      ++sysData.systemTime.Hours;
-      sysData.systemTime.Minutes = 0u;
-      if (sysData.systemTime.Hours == 24u) {
-        ++sysData.systemTime.Days;
-        sysData.systemTime.Hours = 0u;
-      }
-    }
-  }
+  SNVS_HPSR |= SNVS_HPSR_PI_MASK; // reset interrupt
+  rtc.one_second_tick();
   asm volatile("dsb");
 }
 

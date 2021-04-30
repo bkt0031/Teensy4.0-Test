@@ -26,7 +26,7 @@ void setup() {
   Serial.println("   rotation");
   tft.setRotation(3u);
   Serial.println("   font");
-  tft.setFont(Arial_12);
+  tft.setFont(Arial_16);
   Serial.println("   screen color");
   tft.fillScreen(ILI9341_BLACK);
   Serial.println("   font color");
