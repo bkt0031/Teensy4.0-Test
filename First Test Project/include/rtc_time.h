@@ -45,6 +45,16 @@ const uint8_t days_in_months[12u] = {
     RTC_DAYS_IN_SEP, RTC_DAYS_IN_OCT, RTC_DAYS_IN_NOV, RTC_DAYS_IN_DEC,
 };
 
+const char* month_names[] = {
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November",
+  "December"
+};
+
+const char* day_names[] = {
+  "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
+};
+
 const uint8_t leading_days[12] = {0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4};
 
 enum time_format { format_12, format_24 };

@@ -46,7 +46,7 @@ void loop() {
     rtc.create_date_time_string(dateStr, sizeof(dateStr), format_24);
     tft.setCursor(40, 120);
     tft.println(dateStr);
-    Serial.printf("tft: %s\n", dateStr);
+    Serial.println(dateStr);
   }
   delay(100);
 }
